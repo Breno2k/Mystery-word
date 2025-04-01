@@ -1,0 +1,7 @@
+.App { 
+  /* Isso faz com que todos os itens fiquem centralizados */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

@@ -4,7 +4,9 @@ function App() {
 
   return (
     <>
-      <h2>Mystery Word</h2>
+      <div className='App'>
+        <h2>Mystery Word</h2>
+      </div>
     </>
   )
 }
