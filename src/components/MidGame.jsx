@@ -1,9 +1,12 @@
 import React from 'react'
 import './MidGame.css'
 
-const MidGame = () => {
+const MidGame = ({ verifyLetter }) => {
     return (
-        <div>MidGame</div>
+        <div>
+            <h1>MidGame</h1>
+            <button onClick={verifyLetter}>Finalizar jogo</button>
+        </div>
     )
 }
 

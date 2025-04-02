@@ -30,14 +30,27 @@ function App() {
   // Adicionando os dados
   const [words] = useState(wordsList);
 
+  // Função para mudar a fase do jogo
+  const startGame = () => {
+    setGameStage(stages[1].name)
+  }
+
+  const verifyLetter = () => {
+    setGameStage(stages[2].name)
+  }
+
+  const retryGame = () => {
+    setGameStage(stages[0].name)
+  }
+
   console.log(words)
 
   return (
     <>
       <div className='App'>
-        {gameStage === "start" && <StartScreen />}
-        {gameStage === "mid" && <MidGame />}
-        {gameStage === "end" && <EndGame />}
+        {gameStage === "start" && <StartScreen startGame={startGame} />}
+        {gameStage === "mid" && <MidGame verifyLetter={verifyLetter} />}
+        {gameStage === "end" && <EndGame retryGame={retryGame} />}
       </div>
     </>
   );
