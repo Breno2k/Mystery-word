@@ -30,9 +30,48 @@ function App() {
   // Adicionando os dados
   const [words] = useState(wordsList);
 
-  // Função para mudar a fase do jogo
+  // Criando o estado da palavra, categoria e as letras
+  const [pickedWord, setPickedWord] = useState("");
+  const [pickedCategory, setPickedCategory] = useState("");
+  const [letters, setLetters] = useState([]);
+
+  // Escolhendo a categoria e a palavra aleatória
+  const pickWordAndCategory = () => {
+    // categoria aleatória
+    const categories = Object.keys(words); // aqui eu estou escolhendo uma chave do meu objeto (que é a categoria)
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)]; // aqui eu consigo escolher uma chave aleatória e arredondar para um número inteiro
+
+
+    // palavra aleatória da categoria
+    const word = words[category][Math.floor(Math.random() * words[category].length)]; // words[category] => significa que estou buscando uma palavra daquela categoria
+
+    console.log(category)
+    console.log(word)
+
+    return { word, category }
+  }
+
+
+  // Funções para mudar as fases do jogo
   const startGame = () => {
-    setGameStage(stages[1].name)
+    // Escolhendo palavra e categoria
+    const { word, category } = pickWordAndCategory()
+
+    // Criando um array de letras
+    let wordLetters = word.split("") // Divide a palavra em caracteres
+
+    wordLetters = wordLetters.map((w) => w.toLowerCase());
+
+    console.log(wordLetters)
+    console.log(word, category);
+
+    // Preenchendo os estados
+    setPickedWord(word);
+    setPickedCategory(category);
+    setLetters(letters);
+
+    setGameStage(stages[1].name);
   }
 
   const verifyLetter = () => {
@@ -43,7 +82,7 @@ function App() {
     setGameStage(stages[0].name)
   }
 
-  console.log(words)
+
 
   return (
     <>
