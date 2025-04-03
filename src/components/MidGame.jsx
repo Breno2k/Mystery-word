@@ -11,6 +11,7 @@ const MidGame = ({ verifyLetter }) => {
             <h3 className="tip">
                 Dica da palavra: <span>Dica...</span>
             </h3>
+            <p>Você ainda tem XX tentativa(s).</p>
             <div className="wordContainer">
                 <span className="letter">A</span>
                 <span className="blankSquare"></span>
