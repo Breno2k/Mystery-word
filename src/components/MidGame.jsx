@@ -1,20 +1,25 @@
 import React from 'react'
 import './MidGame.css'
 
-const MidGame = ({ verifyLetter }) => {
+const MidGame = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score }) => {
     return (
         <div className="game">
             <p className="points">
-                <span>pontuation: 000</span>
+                <span>pontuation: {score}</span>
             </p>
-            <h1>Adivinhe a palavra: </h1>
+            <h1>Adivinhe a palavra:</h1>
             <h3 className="tip">
-                Dica da palavra: <span>Dica...</span>
+                Dica sobre a palavra: <span>{pickedCategory}</span>
             </h3>
-            <p>Você ainda tem XX tentativa(s).</p>
+            <p>Você ainda tem {guesses} tentativa(s).</p>
             <div className="wordContainer">
-                <span className="letter">A</span>
-                <span className="blankSquare"></span>
+                {letters.map((letter, i) => (
+                    guessedLetters.includes(letter) ? (
+                        <span key={i} className="letter">{letter}</span>
+                    ) : (
+                        <span key={i} className="blankSquare"></span>
+                    )
+                ))}
             </div>
             <div className="letterContainer">
                 <p>Tente adivinhar a palavra: </p>
@@ -25,8 +30,9 @@ const MidGame = ({ verifyLetter }) => {
             </div>
             <div className="wrongLettersContainer">
                 <p>Letras já ultilizadas:</p>
-                <span>A, </span>
-                <span>B, </span>
+                {wrongLetters.map((letter, i) => (
+                    <span key={i}>{letter}, </span>
+                ))}
             </div>
         </div>
     )

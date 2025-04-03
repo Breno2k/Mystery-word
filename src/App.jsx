@@ -35,6 +35,13 @@ function App() {
   const [pickedCategory, setPickedCategory] = useState("");
   const [letters, setLetters] = useState([]);
 
+  // Letras adicionadas, letras erradas, número de chances para adivinhar e pontuação
+  const [guessedLetters, setGuessedLetters] = useState([]);
+  const [wrongLetters, setWrongLetters] = useState([]);
+  const [guesses, setGuesses] = useState(3); // 3 chances
+  const [score, setScore] = useState(0);
+
+
   // Escolhendo a categoria e a palavra aleatória
   const pickWordAndCategory = () => {
     // categoria aleatória
@@ -69,7 +76,7 @@ function App() {
     // Preenchendo os estados
     setPickedWord(word);
     setPickedCategory(category);
-    setLetters(letters);
+    setLetters(wordLetters);
 
     setGameStage(stages[1].name);
   }
@@ -88,7 +95,18 @@ function App() {
     <>
       <div className='App'>
         {gameStage === "start" && <StartScreen startGame={startGame} />}
-        {gameStage === "mid" && <MidGame verifyLetter={verifyLetter} />}
+        {gameStage === "mid" && (
+          <MidGame
+            verifyLetter={verifyLetter}
+            pickedWord={pickedWord}
+            pickedCategory={pickedCategory}
+            letters={letters}
+            guessedLetters={guessedLetters}
+            guesses={guesses}
+            wrongLetters={wrongLetters}
+            score={score}
+          />
+        )}
         {gameStage === "end" && <EndGame retryGame={retryGame} />}
       </div>
     </>
