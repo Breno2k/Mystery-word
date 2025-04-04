@@ -21,6 +21,7 @@ const stages = [
   { id: 3, name: "end" },
 ];
 
+const guessesQty = 3;
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
   // Letras adicionadas, letras erradas, número de chances para adivinhar e pontuação
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
-  const [guesses, setGuesses] = useState(3); // 3 chances
+  const [guesses, setGuesses] = useState(guessesQty); // 3 chances
   const [score, setScore] = useState(0);
 
 
@@ -92,7 +93,7 @@ function App() {
       return;
     }
 
-    // empurre a letra adivinhada ou remova um palpite
+    // Adicione a letra correta ou diminua uma tentativa caso tenha errado a letra
     if (letters.includes(normalizedLetter)) {
       setGuessedLetters((actualGuessedLetters) => [
         ...actualGuessedLetters,
@@ -103,13 +104,30 @@ function App() {
         ...actualWrongLetters,
         normalizedLetter,
       ]);
+
+      // Isto diminui o número de tentativas do usuário 
+      setGuesses((actualGuesses) => actualGuesses - 1);
     }
+  };
+
+  // Função que reinicia os states
+  const clearLetterStates = () => {
+    setGuessedLetters([]);
+    setWrongLetters([]);
   }
 
-  console.log(guessedLetters);
-  console.log(wrongLetters);
+  useEffect(() => {
+    if (guesses <= 0) {
+      clearLetterStates();
+
+      setGameStage(stages[2].name);
+    }
+  }, [guesses]);
 
   const retryGame = () => {
+
+    setScore(0);
+    setGuesses(guessesQty);
     setGameStage(stages[0].name)
   }
 
@@ -131,7 +149,7 @@ function App() {
             score={score}
           />
         )}
-        {gameStage === "end" && <EndGame retryGame={retryGame} />}
+        {gameStage === "end" && <EndGame retryGame={retryGame} score={score} />}
       </div>
     </>
   );

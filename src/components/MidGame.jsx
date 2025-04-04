@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './MidGame.css'
 
-const MidGame = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score }) => {
+const MidGame = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score, }) => {
 
     const [letter, setLetter] = useState("");
 
@@ -15,12 +15,12 @@ const MidGame = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLet
         setLetter("");
 
         letterInputRef.current.focus();
-    }
+    };
 
     return (
         <div className="game">
             <p className="points">
-                <span>pontuation: {score}</span>
+                <span>Pontuação</span>: {score}
             </p>
             <h1>Adivinhe a palavra:</h1>
             <h3 className="tip">
@@ -28,13 +28,13 @@ const MidGame = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLet
             </h3>
             <p>Você ainda tem {guesses} tentativa(s).</p>
             <div className="wordContainer">
-                {letters.map((letter, i) => (
+                {letters.map((letter, i) =>
                     guessedLetters.includes(letter) ? (
                         <span key={i} className="letter">{letter}</span>
                     ) : (
                         <span key={i} className="blankSquare"></span>
                     )
-                ))}
+                )}
             </div>
             <div className="letterContainer">
                 <p>Tente adivinhar a palavra: </p>
