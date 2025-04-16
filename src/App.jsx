@@ -44,7 +44,7 @@ function App() {
 
 
   // Escolhendo a categoria e a palavra aleatória
-  const pickWordAndCategory = () => {
+  const pickWordAndCategory = useCallback(() => {
     // categoria aleatória
     const categories = Object.keys(words); // aqui eu estou escolhendo uma chave do meu objeto (que é a categoria)
     const category =
@@ -58,13 +58,16 @@ function App() {
     console.log(word)
 
     return { word, category }
-  }
+  }, [words]);
 
 
   // Funções para mudar as fases do jogo
-  const startGame = () => {
+  const startGame = useCallback(() => {
     // Escolhendo palavra e categoria
     const { word, category } = pickWordAndCategory()
+
+    // Limpando as letras
+    clearLetterStates()
 
     // Criando um array de letras
     let wordLetters = word.split("") // Divide a palavra em caracteres
@@ -79,8 +82,14 @@ function App() {
     setPickedCategory(category);
     setLetters(wordLetters);
 
-    setGameStage(stages[1].name);
-  }
+    // setGameStage(stages[1].name);
+  }, [pickWordAndCategory]);
+
+  // Depois, quando o usuário clicar em "Iniciar Jogo":
+  const handleStart = () => {
+    startGame();
+    setGameStage("mid");
+  };
 
   // processo do input da letra
   const verifyLetter = (letter) => {
@@ -97,7 +106,7 @@ function App() {
     if (letters.includes(normalizedLetter)) {
       setGuessedLetters((actualGuessedLetters) => [
         ...actualGuessedLetters,
-        normalizedLetter,
+        letter,
       ]);
     } else {
       setWrongLetters((actualWrongLetters) => [
@@ -110,12 +119,18 @@ function App() {
     }
   };
 
+  // useEffect(() => {
+  //   setGameStage(stages[0].name);
+  // }, []);
+
+
   // Função que reinicia os states
   const clearLetterStates = () => {
     setGuessedLetters([]);
     setWrongLetters([]);
   }
 
+  // Condição de derrota
   useEffect(() => {
     if (guesses <= 0) {
       clearLetterStates();
@@ -123,6 +138,19 @@ function App() {
       setGameStage(stages[2].name);
     }
   }, [guesses]);
+
+  // Checando a condição de vitória
+  useEffect(() => {
+    const uniqueLetters = [...new Set(letters)];
+
+    // condição de vitória
+    if (guessedLetters.length === uniqueLetters.length) {
+      // adicionando pontuação
+      setScore((actualScore) => (actualScore += 100));
+
+      startGame();
+    }
+  }, [guessedLetters, startGame, letters]);
 
   const retryGame = () => {
 
@@ -136,7 +164,7 @@ function App() {
   return (
     <>
       <div className='App'>
-        {gameStage === "start" && <StartScreen startGame={startGame} />}
+        {gameStage === "start" && <StartScreen startGame={handleStart} />}
         {gameStage === "mid" && (
           <MidGame
             verifyLetter={verifyLetter}
