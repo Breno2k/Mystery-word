@@ -54,8 +54,9 @@ function App() {
     // palavra aleatória da categoria
     const word = words[category][Math.floor(Math.random() * words[category].length)]; // words[category] => significa que estou buscando uma palavra daquela categoria
 
-    console.log(category)
-    console.log(word)
+    // desativando cheater
+    // console.log(category)
+    // console.log(word)
 
     return { word, category }
   }, [words]);
@@ -74,8 +75,9 @@ function App() {
 
     wordLetters = wordLetters.map((w) => w.toLowerCase());
 
-    console.log(wordLetters)
-    console.log(word, category);
+    // desativando cheater
+    // console.log(wordLetters)
+    // console.log(word, category);
 
     // Preenchendo os estados
     setPickedWord(word);
