@@ -144,13 +144,14 @@ function App() {
     const uniqueLetters = [...new Set(letters)];
 
     // condição de vitória
-    if (guessedLetters.length === uniqueLetters.length) {
+    if (guessedLetters.length === uniqueLetters.length && gameStage === stages[1].name) {
       // adicionando pontuação
       setScore((actualScore) => (actualScore += 100));
 
+      // restart com novas palavras
       startGame();
     }
-  }, [guessedLetters, startGame, letters]);
+  }, [guessedLetters, startGame, letters, gameStage]);
 
   const retryGame = () => {
 
