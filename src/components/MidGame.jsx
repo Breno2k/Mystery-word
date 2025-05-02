@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './MidGame.css'
 
-const MidGame = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score, }) => {
+const MidGame = ({ verifyLetter, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score, }) => {
 
     const [letter, setLetter] = useState("");
 
@@ -51,12 +51,16 @@ const MidGame = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLet
                     <button>Jogar!</button>
                 </form>
             </div>
-            <div className="wrongLettersContainer">
+            <div>
                 <p>Letras já ultilizadas:</p>
-                {wrongLetters.map((letter, i) => (
-                    <span key={i}>{letter.toUpperCase()}, </span>
-                ))}
+                <div className="wrongLettersContainer">
+                    {wrongLetters.map((letter, i) => (
+                        <span key={i}><strong>{letter.toUpperCase()}</strong>&nbsp; &nbsp; </span>
+                    ))}
+                </div>
+
             </div>
+            <div className="teste"></div>
         </div>
     )
 }
