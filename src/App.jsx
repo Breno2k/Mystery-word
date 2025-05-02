@@ -75,9 +75,9 @@ function App() {
 
     wordLetters = wordLetters.map((w) => w.toLowerCase());
 
-    // desativando cheater
-    // console.log(wordLetters)
-    // console.log(word, category);
+    // Cheater
+    console.log(wordLetters)
+    console.log(word, category);
 
     // Preenchendo os estados
     setPickedWord(word);
@@ -155,12 +155,21 @@ function App() {
     }
   }, [guessedLetters, startGame, letters, gameStage]);
 
-  const retryGame = () => {
 
+  // função para reiniciar o jogo na tela principal
+  const retryGame = () => {
     setScore(0);
     setGuesses(guessesQty);
     setGameStage(stages[0].name)
   }
+
+  // função para reiniciar o jogo na tela do jogo
+  const playAgain = () => {
+    startGame();
+    setGameStage("mid");
+    setGuesses(guessesQty);
+    setScore(0);
+  };
 
 
 
@@ -180,7 +189,7 @@ function App() {
             score={score}
           />
         )}
-        {gameStage === "end" && <EndGame retryGame={retryGame} score={score} />}
+        {gameStage === "end" && <EndGame playAgain={playAgain} retryGame={retryGame} score={score} />}
       </div>
     </>
   );
