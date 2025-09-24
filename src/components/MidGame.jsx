@@ -52,15 +52,14 @@ const MidGame = ({ verifyLetter, pickedCategory, letters, guessedLetters, wrongL
                 </form>
             </div>
             <div>
-                <p>Letras já ultilizadas:</p>
+
                 <div className="wrongLettersContainer">
+                    <p>Letras já ultilizadas:</p>
                     {wrongLetters.map((letter, i) => (
                         <span key={i}><strong>{letter.toUpperCase()}</strong>&nbsp; &nbsp; </span>
                     ))}
                 </div>
-
             </div>
-            <div className="teste"></div>
         </div>
     )
 }

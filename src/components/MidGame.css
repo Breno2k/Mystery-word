@@ -1,63 +1,460 @@
-@import url('https://fonts.googleapis.com/css2?family=Asset&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700&display=swap');
 
-.game h1 {
-    font-size: 2.5em;
-}
+        .game {
+            min-height: 100vh;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-.points span {
-    font-weight: bold;
-}
+        .game::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
 
-.tip span {
-    color: #ecfa00;
-}
+        .game > * {
+            position: relative;
+            z-index: 2;
+        }
 
-.wordContainer {
-    display: flex;
-    margin: 1.5em;
-    padding: 1.5em;
-    border:20px solid #ecfa00;
-}
+        .points {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            font-family: "Orbitron", monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            margin-bottom: 2rem;
+            animation: slideDown 0.8s ease-out;
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+        }
 
-.letter, .blankSquare {
-    font-size: 70px;
-    line-height: 1.5;
-    border: 3px solid black;
-    height: 100px;
-    width: 100px;
-    text-transform: uppercase;
-    background-color: #fff;
-    color: #000;
-    font-weight: bold;
-}
+        .points span {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+        }
 
-.letterContainer form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .game h1 {
+            font-family: "Orbitron", monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            color: #fff;
+            text-align: center;
+            margin: 2rem 0 1.5rem 0;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
 
-.letterContainer input {
-    height: 50px;
-    width: 50px;
-    font-size: 2em;
-    text-align: center;
-    text-transform: uppercase;
-    margin-right: 1em;
-}
+        .tip {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            font-family: "Inter", sans-serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
 
-.wrongLettersContainer{     
-    margin: 0 auto;
-    text-align: center;
-    width: 300px;
-    height: 100px;
-    border: solid 15px #B0E0E6;
-    border-radius: 100%;
-    background-color: #4169E1;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
+        .tip span {
+            color: #4ecdc4;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px #4ecdc4;
+        }
+
+        .game > p {
+            font-family: "Inter", sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .wordContainer {
+            display: flex;
+            gap: 0.8rem;
+            margin: 2rem 0 3rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: slideUp 1s ease-out 0.7s both;
+        }
+
+        .letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-family: "Orbitron", monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-transform: uppercase;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            animation: letterReveal 0.6s ease-out;
+            transform: scale(1);
+            transition: transform 0.3s ease;
+        }
+
+        .letter:hover {
+            transform: scale(1.1);
+        }
+
+        .blankSquare {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            animation: pulse 2s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .blankSquare:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .letterContainer {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: slideUp 1s ease-out 0.9s both;
+        }
+
+        .letterContainer p {
+            font-family: "Inter", sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .letterContainer form {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .letterContainer input {
+            width: 80px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: "Orbitron", monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            color: #2c3e50;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.15),
+                inset 0 2px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .letterContainer input:focus {
+            border-color: #4ecdc4;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 
+                0 0 20px rgba(78, 205, 196, 0.4),
+                0 8px 25px rgba(0, 0, 0, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .letterContainer button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 12px;
+            font-family: "Inter", sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.2),
+                0 0 0 0 rgba(78, 205, 196, 0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letterContainer button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .letterContainer button:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 25px rgba(0, 0, 0, 0.25),
+                0 0 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .letterContainer button:hover::before {
+            left: 100%;
+        }
+
+        .letterContainer button:active {
+            transform: translateY(0);
+        }
+
+        .wrongLettersContainer {
+            background: rgba(255, 82, 82, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 82, 82, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            animation: slideUp 1s ease-out 1.1s both;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .wrongLettersContainer p {
+            font-family: "Inter", sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .wrongLettersContainer + div p {
+            font-family: "Inter", sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .wrongLettersContainer span {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 82, 82, 0.2);
+            border: 1px solid rgba(255, 82, 82, 0.4);
+            border-radius: 8px;
+            font-family: "Orbitron", monospace;
+            font-size: 1rem;
+            color: #ff5252;
+            text-shadow: 0 0 10px rgba(255, 82, 82, 0.5);
+            animation: wrongLetter 0.5s ease-out;
+            margin: 0.2rem;
+        }
+
+        /* Animations */
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(0.5deg); }
+            66% { transform: translateY(-8px) rotate(-0.5deg); }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.5),
+                    0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+            to {
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 0.8),
+                    0 4px 20px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        @keyframes letterReveal {
+            from {
+                opacity: 0;
+                transform: scale(0) rotate(180deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes wrongLetter {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px) scale(0.8);
+            }
+            50% {
+                transform: translateX(5px) scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .game {
+                padding: 1rem;
+            }
+
+            .points {
+                position: static;
+                margin: 1rem auto 2rem auto;
+                font-size: 1.2rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .letter, .blankSquare {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+            }
+
+            .letterContainer {
+                padding: 1.5rem 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .letterContainer form {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .letterContainer input {
+                width: 70px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wordContainer {
+                gap: 0.5rem;
+            }
+
+            .letter, .blankSquare {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .letterContainer input {
+                width: 60px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
