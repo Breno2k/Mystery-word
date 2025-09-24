@@ -1,5 +1,7 @@
 import './StartScreen.css'
 
+import globo from '../../public/globoTerrestre.gif'
+
 const StartScreen = ({ startGame }) => {
     const title = "Mystery Word";
 
@@ -31,7 +33,7 @@ const StartScreen = ({ startGame }) => {
 
                 <div className="image-container">
                     <div className="image-glow"></div>
-                    <img src="/globo-terrestre.gif" alt="gif animado" className="globe-image" />
+                    <img src={globo} alt="gif animado" className="globe-image" />
                 </div>
 
                 <p className="subtitle">
